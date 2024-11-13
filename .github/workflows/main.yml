@@ -1,0 +1,34 @@
+name: Setup Node.js project in GitHub
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: List directory contents
+        run: ls -R
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - name: Create and initialize psback directory
+        run: |
+          mkdir psback
+          cd psback
+          npm init -y
+
+      - name: Install dependencies
+        run: |
+          cd psback
+          npm install
